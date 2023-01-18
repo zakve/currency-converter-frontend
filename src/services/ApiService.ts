@@ -1,4 +1,4 @@
-import { IConvertParams } from "../models/ConvertParams";
+import { IConvertParams } from "../models/Convert";
 
 const BACKEND_API_URL = 'http://localhost:3000';
 

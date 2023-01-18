@@ -4,12 +4,13 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import ApiService from '../services/ApiService';
+import { IConvertRes } from '../models/Convert';
 
 const ConvertBox = () => {
     const [amount, setAmount] = useState('')
     const [currencies, setCurrencies] = useState({})
     const [currencySelect, setCurrencySelect] = useState('')
-    const [converted, setConverted] = useState()
+    const [converted, setConverted] = useState<IConvertRes | undefined>(undefined)
 
     useEffect(() => {
         const fetchCurrencies = async () => {
@@ -46,16 +47,19 @@ const ConvertBox = () => {
     }
 
     return (
-        <>
+        <Box
+            sx={{
+                padding: '50px',
+                textAlign: 'center'
+                // borderRadius: '10px',
+                // boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px;'
+            }}
+        >
             <Box
                 sx={{
-                    padding: '50px',
-                    margin: '10px',
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'center'
-                    // borderRadius: '10px',
-                    // boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px;'
                 }}
             >
                 <>
@@ -108,11 +112,16 @@ const ConvertBox = () => {
             </Box>
             {
                 converted &&
-                <Box>
-                    <Typography>
-                    </Typography>
-                </Box>}
-        </>
+                <Box
+                    sx={{
+                        margin: '20px'
+                    }}
+                >
+                    <Typography>{converted?.request?.amount} US Dollar = </Typography>
+                    <Typography variant='h5'>{converted?.response?.toFixed(2)} {converted?.request?.to}</Typography>
+                </Box>
+            }
+        </Box>
     )
 };
 
