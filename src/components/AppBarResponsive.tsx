@@ -12,7 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 const pages = ['Convert', 'Statistics'];
 
-function ResponsiveAppBar() {
+function AppBarResponsive() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -32,6 +32,7 @@ function ResponsiveAppBar() {
                         noWrap
                         component="a"
                         href="/"
+                        data-testid="title"
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -109,4 +110,4 @@ function ResponsiveAppBar() {
         </AppBar>
     );
 }
-export default ResponsiveAppBar;
+export default AppBarResponsive;
