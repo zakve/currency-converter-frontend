@@ -22,7 +22,6 @@ Oanda: [https://www.oanda.com/currency-converter/](https://www.oanda.com/currenc
 > - Hooks
 > - Material UI
 > - Vercel Automatic Deployment
-> - i18next internationalization - TODO
 > - React flags - TODO
 
 ## Demo
@@ -38,7 +37,7 @@ npm start
 ```
 
 ### TODO
-- display conversion
-- write tests
-- autodeploy on Vercel
+- Add statistics page
+- write more tests
+- Add better error handling
 - limited conversion only from USD (free version of openexchangerates.org)
