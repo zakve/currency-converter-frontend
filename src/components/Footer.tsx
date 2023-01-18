@@ -2,7 +2,7 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
 const Footer = () => (
-    <footer>
+    <footer aria-label="footer">
         <Container
             maxWidth={false}
             sx={{
