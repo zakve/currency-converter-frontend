@@ -1,6 +1,6 @@
 import { IConvertParams } from "../models/Convert";
 
-const BACKEND_API_URL = 'http://currencyconverter-env.eba-xcdiy96e.eu-central-1.elasticbeanstalk.com';
+const BACKEND_API_URL = 'http://localhost:3000';
 
 const methods = {
     get: 'GET',

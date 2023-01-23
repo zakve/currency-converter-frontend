@@ -29,6 +29,17 @@ Oanda: [https://www.oanda.com/currency-converter/](https://www.oanda.com/currenc
 
 ## Instalation
 ### Clone and install packages
+Backend
+
+```
+git clone https://github.com/zakve/currency-converter-backend.git
+cd currency-converter-backend
+npm i
+npm run dev
+```
+
+Frontend
+
 ```
 git clone https://github.com/zakve/currency-converter-frontend.git
 cd currency-converter-frontend
