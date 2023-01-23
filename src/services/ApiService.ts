@@ -32,6 +32,10 @@ const endpoints = {
         path: `${BACKEND_API_URL}/convert`,
         contentType: contentTypes.json
     },
+    stats: {
+        method: methods.get,
+        path: `${BACKEND_API_URL}/stats`
+    },
 }
 
 const ApiService = {
@@ -59,6 +63,17 @@ const ApiService = {
     getLatest: async () => {
         try {
             const response = await fetch(endpoints.latest.path);
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            const e = error as Error;
+            console.error(e);
+            throw new Error(e.message);
+        }
+    },
+    getStats: async () => {
+        try {
+            const response = await fetch(endpoints.stats.path);
             const data = await response.json();
             return data;
         } catch (error) {
