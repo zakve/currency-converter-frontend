@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,8 +10,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-
-const pages = ['Convert', 'Statistics'];
 
 function AppBarResponsive() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
@@ -72,11 +71,16 @@ function AppBarResponsive() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                            <Link to='/' style={{ textDecoration: 'none' }}>
+                                <MenuItem key='convert' onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">Convert</Typography>
                                 </MenuItem>
-                            ))}
+                            </Link>
+                            <Link to='/statistics' style={{ textDecoration: 'none' }}>
+                                <MenuItem key='statistics' onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">Statistics</Typography>
+                                </MenuItem>
+                            </Link>
                         </Menu>
                     </Box>
                     <Typography
@@ -95,15 +99,24 @@ function AppBarResponsive() {
                         Currency Converter
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
+                        <Link to="/" style={{ textDecoration: 'none' }}>
                             <Button
-                                key={page}
+                                key='convert'
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                {page}
+                                Convert
                             </Button>
-                        ))}
+                        </Link>
+                        <Link to='/statistics' style={{ textDecoration: 'none' }}>
+                            <Button
+                                key='statistics'
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                Statistics
+                            </Button>
+                        </Link>
                     </Box>
                 </Toolbar>
             </Container>

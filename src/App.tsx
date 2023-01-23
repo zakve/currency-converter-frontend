@@ -1,20 +1,31 @@
-import Container from '@mui/material/Container';
+import { Route, Routes } from 'react-router-dom';
+
 import AppBarResponsive from './components/AppBarResponsive';
 import Footer from './components/Footer';
-import ConvertBox from './containers/ConvertBox';
-import ExchangeRates from './containers/ExchangeRates';
+import ConvertPage from './pages/ConvertPage'
+import StatisticsPage from './pages/StatisticsPage'
+import NotFoundPage from './pages/NotFoundPage'
 
-function App() {
+const Layout = () => {
   return (
-    <div className="App">
+    <>
       <AppBarResponsive />
       <main>
-        <Container maxWidth="xl">
-          <ConvertBox />
-          <ExchangeRates />
-        </Container>
+        <Routes>
+          <Route path="/" element={<ConvertPage />} />
+          <Route path="/statistics" element={<StatisticsPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </main>
       <Footer />
+    </>
+  )
+}
+
+const App = () => {
+  return (
+    <div className="App">
+      <Layout />
     </div>
   );
 }
