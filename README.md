@@ -48,7 +48,8 @@ npm start
 ```
 
 ### TODO
-- Add statistics page
 - write more tests
 - Add better error handling
+- Add responsivness
+- Update design
 - limited conversion only from USD (free version of openexchangerates.org)
