@@ -9,9 +9,10 @@ import TableRow from '@mui/material/TableRow';
 
 import ApiService from '../services/ApiService'
 import { ICurrency } from '../models/Currency';
+import SkeletonTable from '../components/SkeletonTable';
 
 const ExchangeRates = () => {
-    const [exchangeRates, setExchangeRates] = useState({})
+    const [exchangeRates, setExchangeRates] = useState()
 
     useEffect(() => {
         const fetchExchangeRates = async () => {
@@ -36,30 +37,35 @@ const ExchangeRates = () => {
             <Typography>
                 Exchange Rates
             </Typography>
-            <TableContainer>
-                <Table sx={{ minWidth: 650 }} aria-label="exchange rates">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Currency code</TableCell>
-                            <TableCell>Rate</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {
-                            Object.entries(exchangeRates as ICurrency)?.map(([key, value]) => {
-                                return (
-                                    <TableRow
-                                        key={key}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-                                        <TableCell>{key}</TableCell>
-                                        <TableCell>{value}</TableCell>
-                                    </TableRow>
-                                )
-                            }) as React.ReactNode}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+            {
+                exchangeRates ?
+                    <TableContainer>
+                        <Table sx={{ minWidth: 650 }} aria-label="exchange rates">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Currency code</TableCell>
+                                    <TableCell>USD convert Rate</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {
+                                    Object.entries(exchangeRates as ICurrency)?.map(([key, value]) => {
+                                        return (
+                                            <TableRow
+                                                key={key}
+                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            >
+                                                <TableCell>{key}</TableCell>
+                                                <TableCell>{value}</TableCell>
+                                            </TableRow>
+                                        )
+                                    }) as React.ReactNode}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    :
+                    <SkeletonTable />
+            }
         </>
     )
 }
