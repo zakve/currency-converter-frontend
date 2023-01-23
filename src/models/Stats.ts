@@ -9,3 +9,9 @@ export interface IStats {
     Count: number,
     ScannedCount: number
 }
+
+export interface ICalculatedStats {
+    popularCurrency: string,
+    totalConverted: number,
+    totalRequests: number
+}
