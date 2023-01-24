@@ -8,6 +8,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Box from '@mui/material/Box';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 import ApiService from '../services/ApiService';
 import { ICalculatedStats, IStats } from '../models/Stats';
@@ -16,6 +18,8 @@ import SkeletonTable from '../components/SkeletonTable';
 const StatisticsPage = () => {
     const [stats, setStats] = useState<IStats>();
     const [calculatedStats, setCalculatedStats] = useState<ICalculatedStats>()
+    const [isSnackOpen, setIsSnackOpen] = useState(false)
+    const [error, setError] = useState<string | undefined>(undefined)
 
     useEffect(() => {
         const fetchCurrencies = async () => {
@@ -23,7 +27,9 @@ const StatisticsPage = () => {
                 const response = await ApiService.getStats()
                 setStats(response)
             } catch (error) {
-                alert(`Error: ${error}`)
+                console.error(error)
+                setError(`Fetch statistics error: ${error}`)
+                setIsSnackOpen(true)
             }
         }
 
@@ -46,6 +52,9 @@ const StatisticsPage = () => {
         }
     }, [stats])
 
+    const handleSnackClose = () => {
+        setIsSnackOpen(false)
+    }
 
     return (
         <Container maxWidth="lg">
@@ -91,6 +100,15 @@ const StatisticsPage = () => {
                         <SkeletonTable />
                 }
             </Box>
+            <Snackbar
+                anchorOrigin={{ vertical: "top", horizontal: 'center' }}
+                open={isSnackOpen}
+                onClose={handleSnackClose}
+            >
+                <Alert onClose={handleSnackClose} severity="error">
+                    {error}
+                </Alert>
+            </Snackbar>
         </Container>
     )
 }
