@@ -47,76 +47,51 @@ const ConvertBox = () => {
     }
 
     return (
-        <Box
-            sx={{
-                padding: '50px',
-                textAlign: 'center'
-                // borderRadius: '10px',
-                // boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px;'
-            }}
-        >
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'center'
-                }}
-            >
-                <>
-                    <FormControl>
-                        <InputLabel htmlFor="outlined-adornment-amount">Amount *</InputLabel>
-                        <OutlinedInput
-                            required
-                            id="outlined-adornment-amount"
-                            startAdornment={<InputAdornment position="start">$</InputAdornment>}
-                            label="Amount"
-                            type="number"
-                            value={amount}
-                            onChange={handleAmountChange}
-                        />
-                    </FormControl>
+        <Box sx={style.container}>
+            <Box sx={style.box}>
+                <FormControl>
+                    <InputLabel htmlFor="amount">Amount *</InputLabel>
+                    <OutlinedInput
+                        required
+                        id="amount"
+                        startAdornment={<InputAdornment position="start">$</InputAdornment>}
+                        label="Amount"
+                        type="number"
+                        value={amount}
+                        onChange={handleAmountChange}
+                    />
+                </FormControl>
 
-                    <FormControl sx={{
-                        minWidth: 120,
-                        marginLeft: '20px'
-                    }}>
-                        <InputLabel id="currency-select">To</InputLabel>
-                        <Select
-                            labelId="currency-select"
-                            id="currency-select"
-                            value={currencySelect}
-                            label="To"
-                            onChange={handleSelectChange}
-                        >
-                            {
-                                Object.keys(currencies)?.map((currency, i) => {
-                                    return (
-                                        <MenuItem key={i} value={currency}>{currency}</MenuItem>
-                                    )
-                                })
-                            }
-                        </Select>
-                    </FormControl>
-
-                    <Button
-                        variant="contained"
-                        onClick={handleSubmit}
-                        sx={{
-                            minWidth: 120,
-                            marginLeft: '20px'
-                        }}
+                <FormControl sx={style.input}>
+                    <InputLabel id="currency-select">To</InputLabel>
+                    <Select
+                        labelId="currency-select"
+                        id="currency-select"
+                        value={currencySelect}
+                        label="To"
+                        onChange={handleSelectChange}
                     >
-                        Convert
-                    </Button>
-                </>
+                        {
+                            Object.keys(currencies)?.map((currency, i) => {
+                                return (
+                                    <MenuItem key={i} value={currency}>{currency}</MenuItem>
+                                )
+                            })
+                        }
+                    </Select>
+                </FormControl>
+
+                <Button
+                    variant="contained"
+                    onClick={handleSubmit}
+                    sx={style.input}
+                >
+                    Convert
+                </Button>
             </Box>
             {
                 converted &&
-                <Box
-                    sx={{
-                        margin: '20px'
-                    }}
-                >
+                <Box sx={{ m: "20px" }}>
                     <Typography>{converted?.request?.amount} US Dollar = </Typography>
                     <Typography variant='h5'>{converted?.response?.toFixed(2)} {converted?.request?.to}</Typography>
                 </Box>
@@ -124,5 +99,33 @@ const ConvertBox = () => {
         </Box>
     )
 };
+
+const style = {
+    container: {
+        padding: {
+            sm: '50px',
+            xs: '30px'
+        },
+        textAlign: 'center'
+        // borderRadius: '10px',
+        // boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px;'
+    },
+    box: {
+        display: 'flex',
+        flexDirection: {
+            sm: 'row',
+            xs: 'column'
+        },
+        justifyContent: 'center'
+
+    },
+    input: {
+        minWidth: 120,
+        marginLeft: {
+            sm: '20px',
+            xs: '0px'
+        }
+    }
+}
 
 export default ConvertBox;

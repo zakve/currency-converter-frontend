@@ -48,23 +48,21 @@ const StatisticsPage = () => {
 
 
     return (
-        <Container maxWidth="xl">
-            <Box sx={{
-                margin: "30px"
-            }}>
+        <Container maxWidth="lg">
+            <Box sx={style.box}>
                 <Typography variant='h5'>Statistics</Typography>
                 {
                     calculatedStats &&
                     <>
-                        <p>Most Popular Destination Currency: {calculatedStats.popularCurrency}</p>
-                        <p>Total Amount Converted: {calculatedStats.totalConverted}</p>
-                        <p>Total Number of Conversion Requests: {calculatedStats.totalRequests}</p>
+                        Most Popular Destination Currency: <Typography sx={style.bold}>{calculatedStats.popularCurrency}</Typography>
+                        Total Amount Converted: <Typography sx={style.bold}>{calculatedStats.totalConverted}</Typography>
+                        Total Number of Conversion Requests: <Typography sx={style.bold}>{calculatedStats.totalRequests}</Typography>
                     </>
                 }
                 {
                     stats ?
                         <TableContainer>
-                            <Table sx={{ minWidth: 650 }} aria-label="statistics">
+                            <Table sx={style.table} aria-label="statistics">
                                 <TableHead>
                                     <TableRow>
                                         <TableCell>Currency code</TableCell>
@@ -78,7 +76,7 @@ const StatisticsPage = () => {
                                             return (
                                                 <TableRow
                                                     key={i}
-                                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                    sx={style.tableRow}
                                                 >
                                                     <TableCell>{item.DestinationCurrency}</TableCell>
                                                     <TableCell>{item.TotalAmountConverted}</TableCell>
@@ -95,6 +93,21 @@ const StatisticsPage = () => {
             </Box>
         </Container>
     )
+}
+
+const style = {
+    box: {
+        my: "30px"
+    },
+    table: {
+        textAlign: 'center'
+    },
+    tableRow: {
+        '&:last-child td, &:last-child th': { border: 0 }
+    },
+    bold: {
+        fontWeight: 'bold'
+    }
 }
 
 export default StatisticsPage

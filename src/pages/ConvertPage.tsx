@@ -5,7 +5,7 @@ import ExchangeRates from '../containers/ExchangeRates';
 
 const ConvertPage = () => {
     return (
-        <Container maxWidth="xl">
+        <Container maxWidth="lg">
             <ConvertBox />
             <ExchangeRates />
         </Container>

@@ -40,7 +40,7 @@ const ExchangeRates = () => {
             {
                 exchangeRates ?
                     <TableContainer>
-                        <Table sx={{ minWidth: 650 }} aria-label="exchange rates">
+                        <Table sx={style.table} aria-label="exchange rates">
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Currency code</TableCell>
@@ -53,7 +53,7 @@ const ExchangeRates = () => {
                                         return (
                                             <TableRow
                                                 key={key}
-                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                                sx={style.tableRow}
                                             >
                                                 <TableCell>{key}</TableCell>
                                                 <TableCell>{value}</TableCell>
@@ -68,6 +68,15 @@ const ExchangeRates = () => {
             }
         </>
     )
+}
+
+const style = {
+    table: {
+        textAlign: 'center'
+    },
+    tableRow: {
+        '&:last-child td, &:last-child th': { border: 0 }
+    }
 }
 
 export default ExchangeRates

@@ -32,17 +32,12 @@ function AppBarResponsive() {
                         component="a"
                         href="/"
                         data-testid="title"
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'none', md: 'flex' },
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
+                        sx={style.titleMd}
                     >
                         Currency Converter
                     </Typography>
 
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                    <Box sx={style.boxMd}>
                         <IconButton
                             size="large"
                             aria-label="menu"
@@ -67,9 +62,7 @@ function AppBarResponsive() {
                             }}
                             open={Boolean(anchorElNav)}
                             onClose={handleCloseNavMenu}
-                            sx={{
-                                display: { xs: 'block', md: 'none' },
-                            }}
+                            sx={style.menu}
                         >
                             <Link to='/' style={{ textDecoration: 'none' }}>
                                 <MenuItem key='convert' onClick={handleCloseNavMenu}>
@@ -88,22 +81,16 @@ function AppBarResponsive() {
                         noWrap
                         component="a"
                         href=""
-                        sx={{
-                            mr: 2,
-                            display: { xs: 'flex', md: 'none' },
-                            flexGrow: 1,
-                            color: 'inherit',
-                            textDecoration: 'none',
-                        }}
+                        sx={style.titleXs}
                     >
                         Currency Converter
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={style.boxXs}>
                         <Link to="/" style={{ textDecoration: 'none' }}>
                             <Button
                                 key='convert'
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                sx={style.button}
                             >
                                 Convert
                             </Button>
@@ -112,7 +99,7 @@ function AppBarResponsive() {
                             <Button
                                 key='statistics'
                                 onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                sx={style.button}
                             >
                                 Statistics
                             </Button>
@@ -123,4 +110,37 @@ function AppBarResponsive() {
         </AppBar>
     );
 }
+
+const style = {
+    titleMd: {
+        mr: 2,
+        display: { xs: 'none', md: 'flex' },
+        color: 'inherit',
+        textDecoration: 'none',
+    },
+    titleXs: {
+        mr: 2,
+        display: { xs: 'flex', md: 'none' },
+        flexGrow: 1,
+        color: 'inherit',
+        textDecoration: 'none',
+    },
+    boxMd: {
+        flexGrow: 1,
+        display: { xs: 'flex', md: 'none' }
+    },
+    boxXs: {
+        flexGrow: 1,
+        display: { xs: 'none', md: 'flex' }
+    },
+    menu: {
+        display: { xs: 'block', md: 'none' },
+    },
+    button: {
+        my: 2,
+        color: 'white',
+        display: 'block'
+    }
+}
+
 export default AppBarResponsive;

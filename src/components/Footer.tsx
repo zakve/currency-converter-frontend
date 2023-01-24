@@ -5,21 +5,26 @@ const Footer = () => (
     <footer aria-label="footer">
         <Container
             maxWidth={false}
-            sx={{
-                bgcolor: 'primary.main',
-                textAlign: 'center',
-                padding: '1rem'
-            }}
+            sx={style.container}
         >
             <Typography
-                sx={{
-                    color: '#ffffff'
-                }}
+                sx={style.footerText}
             >
                 Martin Zaklasnik 2023
             </Typography>
         </Container>
     </footer>
 );
+
+const style = {
+    container: {
+        bgcolor: 'primary.main',
+        textAlign: 'center',
+        padding: '1rem'
+    },
+    footerText: {
+        color: '#ffffff'
+    }
+}
 
 export default Footer;
