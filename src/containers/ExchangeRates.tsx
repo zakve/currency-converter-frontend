@@ -6,6 +6,8 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 import ApiService from '../services/ApiService'
 import { ICurrency } from '../models/Currency';
@@ -13,24 +15,32 @@ import SkeletonTable from '../components/SkeletonTable';
 
 const ExchangeRates = () => {
     const [exchangeRates, setExchangeRates] = useState()
+    const [isSnackOpen, setIsSnackOpen] = useState(false)
+    const [error, setError] = useState<string | undefined>(undefined)
 
     useEffect(() => {
         const fetchExchangeRates = async () => {
             try {
                 const response = await ApiService.getLatest()
                 if (!response || !response.rates) {
-                    alert(`Error: Cannot get latest exchange rates`)
+                    setError(`Fetch latest exchange rate error`)
+                    setIsSnackOpen(true)
                     return
                 }
 
                 setExchangeRates(response.rates)
             } catch (error) {
-                alert(`Error: ${error}`)
+                setError(`Fetch latest exchange rate error: ${error}`)
+                setIsSnackOpen(true)
             }
         }
 
         fetchExchangeRates()
     }, [])
+
+    const handleSnackClose = () => {
+        setIsSnackOpen(false)
+    }
 
     return (
         <>
@@ -66,6 +76,15 @@ const ExchangeRates = () => {
                     :
                     <SkeletonTable />
             }
+            <Snackbar
+                anchorOrigin={{ vertical: "top", horizontal: 'center' }}
+                open={isSnackOpen}
+                onClose={handleSnackClose}
+            >
+                <Alert onClose={handleSnackClose} severity="error">
+                    {error}
+                </Alert>
+            </Snackbar>
         </>
     )
 }

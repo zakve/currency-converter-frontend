@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Box, Button, FormControl, InputAdornment, InputLabel, MenuItem, Typography } from '@mui/material';
+import { Alert, Box, Button, FormControl, InputAdornment, InputLabel, MenuItem, Snackbar, Typography } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
@@ -11,6 +11,8 @@ const ConvertBox = () => {
     const [currencies, setCurrencies] = useState({})
     const [currencySelect, setCurrencySelect] = useState('')
     const [converted, setConverted] = useState<IConvertRes | undefined>(undefined)
+    const [isSnackOpen, setIsSnackOpen] = useState(false)
+    const [error, setError] = useState<string | undefined>(undefined)
 
     useEffect(() => {
         const fetchCurrencies = async () => {
@@ -18,7 +20,9 @@ const ConvertBox = () => {
                 const response = await ApiService.getCurrencies()
                 setCurrencies(response)
             } catch (error) {
-                alert(`Error: ${error}`)
+                console.error(error)
+                setError(`Fetch currencies error: ${error}`)
+                setIsSnackOpen(true)
             }
         }
 
@@ -38,12 +42,19 @@ const ConvertBox = () => {
         event.preventDefault();
 
         // validation
-        if (!amount || isNaN(Number(amount)) || !currencySelect)
-            return alert('You must fill in the amount and currency')
+        if (!amount || isNaN(Number(amount)) || !currencySelect) {
+            setError('You must fill in the amount and currency')
+            setIsSnackOpen(true)
+            return
+        }
 
         // convert
         const convertRes = await ApiService.convert({ amount, to: currencySelect })
         setConverted(convertRes)
+    }
+
+    const handleSnackClose = () => {
+        setIsSnackOpen(false)
     }
 
     return (
@@ -96,6 +107,15 @@ const ConvertBox = () => {
                     <Typography variant='h5'>{converted?.response?.toFixed(2)} {converted?.request?.to}</Typography>
                 </Box>
             }
+            <Snackbar
+                anchorOrigin={{ vertical: "top", horizontal: 'center' }}
+                open={isSnackOpen}
+                onClose={handleSnackClose}
+            >
+                <Alert onClose={handleSnackClose} severity="error">
+                    {error}
+                </Alert>
+            </Snackbar>
         </Box>
     )
 };
