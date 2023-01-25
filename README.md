@@ -25,7 +25,8 @@ Oanda: [https://www.oanda.com/currency-converter/](https://www.oanda.com/currenc
 > - React flags - TODO
 
 ## Demo
-- TODO
+![Convert](/src/assets/screenshots/convert.png)
+![Statistics](/src/assets/screenshots/statistics.png)
 
 ## Instalation
 ### Clone and install packages
@@ -49,6 +50,5 @@ npm start
 
 ### TODO
 - write more tests
-- Add better error handling
 - Update design
 - limited conversion only from USD (free version of openexchangerates.org)
